@@ -1,4 +1,3 @@
 FROM mkodockx/docker-clamav:latest
 
-RUN echo "HTTPProxyServer pxdev.nexxera.com" >> /etc/clamav/freshclam.conf && \
-    echo "HTTPProxyPort 3128" >> /etc/clamav/freshclam.conf
+RUN sed -i '4iecho -e "HTTPProxyServer ${HTTP_PROXY} \nHTTPProxyPort 3128" >> /etc/clamav/freshclam.conf' /bootstrap.sh
