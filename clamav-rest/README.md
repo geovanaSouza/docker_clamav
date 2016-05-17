@@ -12,3 +12,4 @@ oadm policy add-scc-to-group privileged system:serviceaccounts:geovana
 
 oc new-app --name clamav-rest -e host=clamav-server port=3310 dreg-dev.nexxera.com/clamav/clamav-rest:latest -l app=clamav-rest
 
+oc expose service clamav-rest --hostname=clamav-qa.cloudint.nexxera.com
