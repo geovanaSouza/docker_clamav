@@ -14,6 +14,8 @@ oc create -f pvc.json
 
 oc new-app --name clamav-server -e HTTP_PROXY=pxdev.nexxera.com dreg-dev.nexxera.com/clamav/clamav-server:latest -l app=clamav-server
 
+oc volume dc/clamav-server --add --overwrite -t persistentVolumeClaim --claim-name=clamav-server-claim --name=clamav-server-storage -m /var/lib/clamav
+
 oc edit -o json dc clamav-server
 
 Acrescentar o securityContext conforme estrutura abaixo:
