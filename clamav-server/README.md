@@ -10,8 +10,9 @@ docker run -d --name clamav-server -p 3310:3310 -e HTTP_PROXY=pxdev.nexxera.com 
 
 oadm policy add-scc-to-group privileged system:serviceaccounts:geovana
 
-oc new-app --name clamav-server -e HTTP_PROXY=pxdev.nexxera.com dreg-dev.nexxera.com/clamav/clamav-server:latest -l app=clamav-server
+oc create -f pvc.json
 
+oc new-app --name clamav-server -e HTTP_PROXY=pxdev.nexxera.com dreg-dev.nexxera.com/clamav/clamav-server:latest -l app=clamav-server
 
 oc edit -o json dc clamav-server
 
