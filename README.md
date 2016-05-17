@@ -16,11 +16,14 @@ oc new-app --name clamav-server -e HTTP_PROXY=pxdev.nexxera.com dreg-dev.nexxera
 oc edit -o json dc clamav-server
 
 Acrescentar o securityContext conforme estrutura abaixo:
+```
                         "securityContext": {
                             "privileged": true
                         }
+```
 
 Inserir na seguinte estrutura:
+```
             "spec": {
                 "containers": [
                     {
@@ -42,4 +45,4 @@ Inserir na seguinte estrutura:
                 "dnsPolicy": "ClusterFirst",
                 "securityContext": {}
             }
-
+```
