@@ -23,3 +23,5 @@ oc patch dc clamav-server --patch '{"spec":{"template":{"spec":{"serviceAccountN
 oc volume dc/clamav-server --remove --name=clamav-server-volume-1
 
 oc volume dc/clamav-server --add --overwrite -t persistentVolumeClaim --claim-name=clamav-server-claim --name=clamav-server-storage -m /var/lib/clamav
+
+oc deploy clamav-server --latest
