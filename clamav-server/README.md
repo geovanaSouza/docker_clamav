@@ -1,10 +1,10 @@
 # DOCKER
 
-docker build --rm -t dreg-dev.nexxera.com/clamav/clamav-server:latest .
+docker build --rm -t geovanasouza/clamav-server:latest .
 
-docker push dreg-dev.nexxera.com/clamav/clamav-server:latest
+docker push geovanasouza/clamav-server:latest
 
-docker run -d --name clamav-server -p 3310:3310 -e HTTP_PROXY=pxdev.nexxera.com dreg-dev.nexxera.com/clamav/clamav-server
+docker run -d --name clamav-server -p 3310:3310 -e HTTP_PROXY=myproxy.com geovanasouza/clamav-server
 
 # OPENSHIFT
 
@@ -12,7 +12,7 @@ oadm policy add-scc-to-group privileged system:serviceaccounts:geovana
 
 oc create -f pvc.json
 
-oc new-app --name clamav-server -e HTTP_PROXY=pxdev.nexxera.com dreg-dev.nexxera.com/clamav/clamav-server:latest -l app=clamav-server
+oc new-app --name clamav-server -e HTTP_PROXY=myproxy.com geovanasouza/clamav-server:latest -l app=clamav-server
 
 oc volume dc/clamav-server --add --overwrite -t persistentVolumeClaim --claim-name=clamav-server-claim --name=clamav-server-storage -m /var/lib/clamav
 

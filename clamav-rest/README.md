@@ -1,17 +1,19 @@
 # DOCKER
 
-docker build --rm -t dreg-dev.nexxera.com/clamav/clamav-rest:latest .
+docker build --rm -t geovanasouza/clamav-rest:latest .
 
-docker push dreg-dev.nexxera.com/clamav/clamav-rest:latest
+docker push geovanasouza/clamav-rest:latest
 
-docker run -p 8080:8080 --link clamav-server:clamav-server --name clamav-rest -e host=clamav-server dreg-dev.nexxera.com/clamav/clamav-rest
+docker run -p 8080:8080 --link clamav-server:clamav-server --name clamav-rest -e host=clamav-server geovanasouza/clamav-rest
 
 # OPENSHIFT
 
 oadm policy add-scc-to-group privileged system:serviceaccounts:geovana
 
-oc new-app --name clamav-rest -e host=clamav-server port=3310 dreg-dev.nexxera.com/clamav/clamav-rest:latest -l app=clamav-rest
+oc new-app --name clamav-rest -e host=clamav-server port=3310 geovanasouza/clamav-rest:latest -l app=clamav-rest
 
-oc expose service clamav-rest --hostname=clamav-qa.cloudint.nexxera.com
+oc expose service clamav-rest --hostname=clamav.10.2.2.2.xip.io
+
+Expor via https:
 
 oc patch route clamav-rest  -p '{"spec": {"tls": {"termination": "edge","insecureEdgeTerminationPolicy": "Redirect"}}}'
