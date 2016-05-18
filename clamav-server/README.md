@@ -20,4 +20,6 @@ oc new-app --name clamav-server -e HTTP_PROXY=myproxy.com geovanasouza/clamav-se
 
 oc patch dc clamav-server --patch '{"spec":{"template":{"spec":{"serviceAccountName": "clamav"}}}}'
 
+oc volume dc/clamav-server --remove --name=clamav-server-volume-1
+
 oc volume dc/clamav-server --add --overwrite -t persistentVolumeClaim --claim-name=clamav-server-claim --name=clamav-server-storage -m /var/lib/clamav
