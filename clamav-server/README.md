@@ -12,7 +12,7 @@ oc new-project clamav
 
 oc create -f user.yaml
 
-oadm policy add-scc-to-user system:serviceaccount:clamav:clamav
+oadm policy add-scc-to-user anyuid system:serviceaccount:clamav:clamav
 
 oc create -f pvc.json
 
